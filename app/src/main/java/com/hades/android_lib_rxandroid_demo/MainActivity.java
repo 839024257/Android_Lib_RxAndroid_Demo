@@ -16,6 +16,7 @@ import butterknife.InjectView;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func1;
@@ -358,7 +359,7 @@ public class MainActivity extends AppCompatActivity implements LvItemAdapter.ILv
     }
 
     private void demo72() {
-        Observable<String> observable = Observable.create(new Observable.OnSubscribe<UserInfo>() {
+        Subscription observable = Observable.create(new Observable.OnSubscribe<UserInfo>() {
             @Override
             public void call(Subscriber<? super UserInfo> subscriber) {
                 subscriber.onNext(getTopStory());
@@ -369,9 +370,7 @@ public class MainActivity extends AppCompatActivity implements LvItemAdapter.ILv
             public String call(UserInfo userInfo) {
                 return userInfo.name + ", position 72";
             }
-        });
-
-        observable.subscribe(new Subscriber<String>() {
+        }).subscribe(new Subscriber<String>() {
             @Override
             public void onCompleted() {
 
@@ -387,10 +386,104 @@ public class MainActivity extends AppCompatActivity implements LvItemAdapter.ILv
                 Log.d(TAG, "onNext: s=" + s);
             }
         });
+    }
+
+    /**
+     * [RxJava] 在I/O线程发射HackerNews的故事, 但是将这些故事的标题传递给UI线程上的Observers。
+     **/
+    private void sendNameFromIOToMain4Position8() {
+        demo81();
+        demo82();
+    }
+
+    private void demo81() {
+        Observable<UserInfo> observable = Observable.create(new Observable.OnSubscribe<UserInfo>() {
+            @Override
+            public void call(Subscriber<? super UserInfo> subscriber) {
+                subscriber.onNext(getTopStory());
+                subscriber.onCompleted();
+            }
+        });
+
+        Observable<String> observable2 = observable.map(new Func1<UserInfo, String>() {
+            @Override
+            public String call(UserInfo userInfo) {
+                return userInfo.name + ", position 81";
+            }
+        });
+
+        Subscriber<String> subscriberAsReceiver = new Subscriber<String>() {
+            @Override
+            public void onCompleted() {
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(String s) {
+                Log.d(TAG, "onNext: s=" + s);
+            }
+        };
+        observable2.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(subscriberAsReceiver);
+    }
+
+    private void demo82() {
+        Subscription observable = Observable.create(new Observable.OnSubscribe<UserInfo>() {
+            @Override
+            public void call(Subscriber<? super UserInfo> subscriber) {
+                subscriber.onNext(getTopStory());
+                subscriber.onCompleted();
+            }
+        }).map(new Func1<UserInfo, String>() {
+            @Override
+            public String call(UserInfo userInfo) {
+                return userInfo.name + ", position 82";
+            }
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<String>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(String s) {
+                Log.d(TAG, "onNext: s=" + s);
+            }
+        });
+    }
+
+
+    /**
+     * RxJava解决重复查询 : 第一种方法，创建Observables并用Loader类取异步数据。
+     * Building Observables on Top of Loadersit
+     */
+    private void useLoaderResolveRepeatQuery4Position9() {
+
+    }
+
+    /**
+     * <pre>
+     * Using cache or replay with Observables that Survive Configuration Changes
+     * 用RxJava解决重复查询的问题
+     * 第二种解决重复查询问题的方法是:
+     * a) 确保Observables幸免于配置的改变
+     * b) 使用cache或者replay操作符让这些Observables给未来的Observers发射相同的数据
+     * </pre>
+     */
+    private void useCacheOrReplaceResolveRepeatQuery4Position10() {
 
     }
 
     @Override
+
     public void onClick(int position) {
         switch (position) {
             case 0:
@@ -425,6 +518,10 @@ public class MainActivity extends AppCompatActivity implements LvItemAdapter.ILv
                 mapSendUserPosition7();
                 break;
 
+            case 8:
+                sendNameFromIOToMain4Position8();
+                break;
+
 
             default:
                 break;
@@ -440,6 +537,7 @@ public class MainActivity extends AppCompatActivity implements LvItemAdapter.ILv
         mDataSource.add(5, new LvItemBean("[RaJava] Schedulers决定了Observables在哪个线程发射他们的异步数据流，也决定了Observers在哪个线程消费这些数据流。", "btn5"));
         mDataSource.add(6, new LvItemBean("[RxJava] The truth of position5 : 一个操作符是被应用于一个源Observable并且作为应用的结果它将返回一个新的Observable。", "btn6"));
         mDataSource.add(7, new LvItemBean("[RxJava] map操作符允许我们把一个发射故事的Observable变成一个发射这些故事标题的Observable。", "btn7"));
+        mDataSource.add(8, new LvItemBean("[RxJava] 在I/O线程发射HackerNews的故事, 但是将这些故事的标题传递给UI线程上的Observers。", "btn8"));
     }
 
     private String getBuiltStrData() {
