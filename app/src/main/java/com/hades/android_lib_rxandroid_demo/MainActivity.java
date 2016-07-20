@@ -19,6 +19,8 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func1;
+import rx.internal.operators.OnSubscribeAutoConnect;
+import rx.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity implements LvItemAdapter.ILvItemBtnClickDelegate {
     private static final String TAG = "MainActivity";
@@ -55,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements LvItemAdapter.ILv
             }
         });
 
-        Subscriber subscriber = new Subscriber<String>() {
+        Subscriber<String> subscriber = new Subscriber<String>() {
             @Override
             public void onCompleted() {
                 Log.d(TAG, "onCompleted: ");
@@ -264,6 +266,130 @@ public class MainActivity extends AppCompatActivity implements LvItemAdapter.ILv
         }).start();
     }
 
+    /**
+     * [RxJava] The truth of position5 : 一个操作符是被应用于一个源Observable并且作为应用的结果它将返回一个新的Observable。
+     */
+    private void Schedulers4Position6() {
+        /**
+         * <pre>
+         *     Schedulers.io()会返回一个Scheduler，用来调度Observable.OnSubscribe对象里面的call()方法跑在一个I/O线程(sub thread)上。
+         *     使用Scheduler还有另一个方法:observeOn()。使用这个方法决定Observer在哪一个线程上消费由Observable subscribeOn()方法发出的数据，因此你能把observeOn()方法关联到通过subscribeOn()返回的Observable上:
+         *     AndroidSchedulers.mainThread()实际上不属于RxJava库，但是可以通过依赖RxAndroid库来使用。调用observeOn()方法主要点在于，你可以修改Observer消费由Observable发出的数据的线程。
+         * </pre>
+         */
+
+        Observable observable = Observable.create(new Observable.OnSubscribe<UserInfo>() {
+            @Override
+            public void call(Subscriber<? super UserInfo> subscriber) {
+                Log.d(TAG, "call: threadId=" + Thread.currentThread().getId());
+                subscriber.onNext(getNewestStory());
+                subscriber.onCompleted();
+            }
+        });
+
+        Observable observable2 = observable
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+
+        Subscriber<UserInfo> subscriberAsReceiver = new Subscriber<UserInfo>() {
+            @Override
+            public void onCompleted() {
+                Log.d(TAG, "onCompleted: ");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+            }
+
+            @Override
+            public void onNext(UserInfo userInfo) {
+                Log.d(TAG, "onNext: userInfo=" + userInfo);
+                Log.d(TAG, "onNext: threadId=" + Thread.currentThread().getId());
+
+            }
+        };
+
+        observable2.subscribe(subscriberAsReceiver);
+    }
+
+    /**
+     * [RxJava] map操作符允许我们把一个发射故事的Observable变成一个发射这些故事标题的Observable。
+     */
+    private void mapSendUserPosition7() {
+        demo71();
+        demo72();
+    }
+
+    private void demo71() {
+        Observable<UserInfo> observable = Observable.create(new Observable.OnSubscribe<UserInfo>() {
+            @Override
+            public void call(Subscriber<? super UserInfo> subscriber) {
+                subscriber.onNext(getTopStory());
+                subscriber.onCompleted();
+            }
+        });
+
+        Observable<String> nameObservable = observable.map(new Func1<UserInfo, String>() {
+            @Override
+            public String call(UserInfo userInfo) {
+                return userInfo.name + ", position 71";
+            }
+        });
+
+        Subscriber<String> subscriberAsReceiver = new Subscriber<String>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(String s) {
+                Toast.makeText(MainActivity.this, s, Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "onNext: s=" + s);
+            }
+        };
+
+        nameObservable.subscribe(subscriberAsReceiver);
+    }
+
+    private void demo72() {
+        Observable<String> observable = Observable.create(new Observable.OnSubscribe<UserInfo>() {
+            @Override
+            public void call(Subscriber<? super UserInfo> subscriber) {
+                subscriber.onNext(getTopStory());
+                subscriber.onCompleted();
+            }
+        }).map(new Func1<UserInfo, String>() {
+            @Override
+            public String call(UserInfo userInfo) {
+                return userInfo.name + ", position 72";
+            }
+        });
+
+        observable.subscribe(new Subscriber<String>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(String s) {
+                Log.d(TAG, "onNext: s=" + s);
+            }
+        });
+
+    }
+
     @Override
     public void onClick(int position) {
         switch (position) {
@@ -291,6 +417,14 @@ public class MainActivity extends AppCompatActivity implements LvItemAdapter.ILv
                 Schedulers4Position5();
                 break;
 
+            case 6:
+                Schedulers4Position6();
+                break;
+
+            case 7:
+                mapSendUserPosition7();
+                break;
+
 
             default:
                 break;
@@ -304,6 +438,8 @@ public class MainActivity extends AppCompatActivity implements LvItemAdapter.ILv
         mDataSource.add(3, new LvItemBean("[RxJava] Observer as receiver.", "btn3"));
         mDataSource.add(4, new LvItemBean("[RxJava] How Observable to emit the story from API server..", "btn4"));
         mDataSource.add(5, new LvItemBean("[RaJava] Schedulers决定了Observables在哪个线程发射他们的异步数据流，也决定了Observers在哪个线程消费这些数据流。", "btn5"));
+        mDataSource.add(6, new LvItemBean("[RxJava] The truth of position5 : 一个操作符是被应用于一个源Observable并且作为应用的结果它将返回一个新的Observable。", "btn6"));
+        mDataSource.add(7, new LvItemBean("[RxJava] map操作符允许我们把一个发射故事的Observable变成一个发射这些故事标题的Observable。", "btn7"));
     }
 
     private String getBuiltStrData() {
