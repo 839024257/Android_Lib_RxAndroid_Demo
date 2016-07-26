@@ -2,6 +2,9 @@ package com.hades.android_lib_rxandroid_demo;
 
 import android.widget.Toast;
 
+import com.hades.android_lib_rxandroid_demo.base.BaseSampleListClickFragment;
+import com.hades.android_lib_rxandroid_demo.base.LvItemBean;
+
 import java.util.List;
 
 /**

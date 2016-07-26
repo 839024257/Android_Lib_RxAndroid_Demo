@@ -1,5 +1,8 @@
 package com.hades.android_lib_rxandroid_demo;
 
+import com.hades.android_lib_rxandroid_demo.base.BaseSampleListClickActivity;
+import com.hades.android_lib_rxandroid_demo.base.LvItemBean;
+
 import java.util.List;
 
 public class DemoListClickActivity extends BaseSampleListClickActivity {

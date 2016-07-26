@@ -1,4 +1,4 @@
-package com.hades.android_lib_rxandroid_demo;
+package com.hades.android_lib_rxandroid_demo.base;
 
 /**
  * Created by yc99656 on 7/20/2016.

@@ -3,6 +3,9 @@ package com.hades.android_lib_rxandroid_demo;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.hades.android_lib_rxandroid_demo.base.BaseSampleListClickFragment;
+import com.hades.android_lib_rxandroid_demo.base.LvItemBean;
+
 import org.json.JSONException;
 
 import java.util.List;

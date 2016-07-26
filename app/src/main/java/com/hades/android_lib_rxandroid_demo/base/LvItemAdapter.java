@@ -1,4 +1,4 @@
-package com.hades.android_lib_rxandroid_demo;
+package com.hades.android_lib_rxandroid_demo.base;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.hades.android_lib_rxandroid_demo.R;
 
 import java.util.ArrayList;
 import java.util.List;

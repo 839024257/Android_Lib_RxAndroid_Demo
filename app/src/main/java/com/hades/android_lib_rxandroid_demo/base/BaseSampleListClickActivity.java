@@ -1,4 +1,4 @@
-package com.hades.android_lib_rxandroid_demo;
+package com.hades.android_lib_rxandroid_demo.base;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.hades.android_lib_rxandroid_demo.R;
 
 import java.util.ArrayList;
 import java.util.List;
