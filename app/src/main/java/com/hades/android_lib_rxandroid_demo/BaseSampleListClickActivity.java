@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,17 +14,21 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class DemoActivity extends Activity implements LvItemAdapter.ILvItemBtnClickDelegate {
-    private static final String TAG = DemoActivity.class.getSimpleName();
+public abstract class BaseSampleListClickActivity extends Activity implements LvItemAdapter.ILvItemBtnClickDelegate {
+    private static final String TAG = BaseSampleListClickActivity.class.getSimpleName();
 
     @InjectView(R.id.desc)
-    View desc;
+    TextView desc;
 
     @InjectView(R.id.lv)
     ListView listView;
 
+    @InjectView(R.id.lvContainer)
+    LinearLayout lvContainer;
+
     @InjectView(R.id.container)
     LinearLayout container;
+
 
     LvItemAdapter mAdapter;
     List<LvItemBean> mDataSource = new ArrayList<>();
@@ -31,14 +36,15 @@ public class DemoActivity extends Activity implements LvItemAdapter.ILvItemBtnCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.demo_activity_layout);
+        setContentView(R.layout.actvity_base_sample_list_click_layout);
 
         ButterKnife.inject(this);
 
-        createDataSource();
-        mAdapter = new LvItemAdapter(DemoActivity.this, mDataSource);
-        mAdapter.setDelegate(this);
+        desc.setText(getDescTitle());
 
+        createDataSource();
+        mAdapter = new LvItemAdapter(BaseSampleListClickActivity.this, mDataSource);
+        mAdapter.setDelegate(this);
         listView.setAdapter(mAdapter);
     }
 
@@ -51,34 +57,13 @@ public class DemoActivity extends Activity implements LvItemAdapter.ILvItemBtnCl
     private void showFragment(boolean isShowFragment) {
         if (isShowFragment) {
             container.setVisibility(View.VISIBLE);
-            listView.setVisibility(View.GONE);
+            lvContainer.setVisibility(View.GONE);
             desc.setVisibility(View.GONE);
             return;
         }
         container.setVisibility(View.GONE);
-        listView.setVisibility(View.VISIBLE);
+        lvContainer.setVisibility(View.VISIBLE);
         desc.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void onClick(int position) {
-        switch (position) {
-            case 0:
-                doPositionClick(new Sample1Fragment());
-                break;
-
-            default:
-                break;
-        }
-        showFragment(true);
-    }
-
-    private void doPositionClick(ISampleFragment iSampleFragment) {
-        getFragmentManager().beginTransaction().add(R.id.container, (Fragment) iSampleFragment, iSampleFragment.getTAG()).addToBackStack(iSampleFragment.getTAG()).commit();
-    }
-
-    public void createDataSource() {
-        mDataSource.add(0, new LvItemBean("Sample 1", "btn1"));
     }
 
     @Override
@@ -86,4 +71,29 @@ public class DemoActivity extends Activity implements LvItemAdapter.ILvItemBtnCl
         ButterKnife.reset(this);
         super.onDestroy();
     }
+
+    public void onClick(int position) {
+        onItemClick(position);
+        showFragment(true);
+    }
+
+    public void createDataSource() {
+        createDataSource4Lv(mDataSource);
+    }
+
+    public String getTAG() {
+        return getActivityTag();
+    }
+
+    public void doPositionClick(ISampleFragment iSampleFragment) {
+        getFragmentManager().beginTransaction().add(R.id.container, (Fragment) iSampleFragment, iSampleFragment.getTAG()).addToBackStack(iSampleFragment.getTAG()).commit();
+    }
+
+    public abstract String getDescTitle();
+
+    public abstract void onItemClick(int position);
+
+    public abstract void createDataSource4Lv(List<LvItemBean> mDataSource);
+
+    public abstract String getActivityTag();
 }

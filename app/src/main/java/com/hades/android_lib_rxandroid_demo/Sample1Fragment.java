@@ -1,22 +1,12 @@
 package com.hades.android_lib_rxandroid_demo;
 
-import android.app.Fragment;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import org.json.JSONException;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;
@@ -29,43 +19,8 @@ import rx.schedulers.Schedulers;
 /**
  * Created by hades on 7/26/2016.
  */
-public class Sample1Fragment extends Fragment implements ISampleFragment, LvItemAdapter.ILvItemBtnClickDelegate {
+public class Sample1Fragment extends BaseSampleListClickFragment {
     private final String TAG = Sample1Fragment.class.getSimpleName();
-
-    @InjectView(R.id.lv)
-    ListView listView;
-
-    LvItemAdapter mAdapter;
-    List<LvItemBean> mDataSource = new ArrayList<>();
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_sample1_layout, container, false);
-        ButterKnife.inject(this, view);
-        return view;
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        createDataSource();
-        mAdapter = new LvItemAdapter(getActivity(), mDataSource);
-        mAdapter.setDelegate(this);
-
-        listView.setAdapter(mAdapter);
-    }
-
-    @Override
-    public void onDestroyView() {
-        ButterKnife.reset(this);
-        super.onDestroyView();
-    }
-
-    public String getTAG() {
-        return TAG;
-    }
 
     /**
      * Observable.create
@@ -505,8 +460,12 @@ public class Sample1Fragment extends Fragment implements ISampleFragment, LvItem
     }
 
     @Override
+    public String getDescTitle() {
+        return "Common Demos for RxJava and RxAndroid";
+    }
 
-    public void onClick(int position) {
+    @Override
+    public void onItemClick(int position) {
         switch (position) {
             case 0:
                 sendStringForPosition0();
@@ -550,7 +509,8 @@ public class Sample1Fragment extends Fragment implements ISampleFragment, LvItem
         }
     }
 
-    public void createDataSource() {
+    @Override
+    public void createDataSource4Lv(List<LvItemBean> mDataSource) {
         mDataSource.add(0, new LvItemBean("Send a string", "btn0"));
         mDataSource.add(1, new LvItemBean("Send a string. Observable.just is a simplification for Observable.create.", "btn1"));
         mDataSource.add(2, new LvItemBean("map的功能就是在observable和subscribe之间可以对数据进行操作", "btn2"));
@@ -560,6 +520,11 @@ public class Sample1Fragment extends Fragment implements ISampleFragment, LvItem
         mDataSource.add(6, new LvItemBean("[RxJava] The truth of position5 : 一个操作符是被应用于一个源Observable并且作为应用的结果它将返回一个新的Observable。", "btn6"));
         mDataSource.add(7, new LvItemBean("[RxJava] map操作符允许我们把一个发射故事的Observable变成一个发射这些故事标题的Observable。", "btn7"));
         mDataSource.add(8, new LvItemBean("[RxJava] 在I/O线程发射HackerNews的故事, 但是将这些故事的标题传递给UI线程上的Observers。", "btn8"));
+    }
+
+    @Override
+    public String getFragmentTag() {
+        return TAG;
     }
 
     private String getBuiltStrData() {
@@ -599,7 +564,7 @@ public class Sample1Fragment extends Fragment implements ISampleFragment, LvItem
 
         @Override
         public String toString() {
-            return "UserInfo{" +
+            return "User{" +
                     "name='" + name + '\'' +
                     ", time='" + time + '\'' +
                     '}';

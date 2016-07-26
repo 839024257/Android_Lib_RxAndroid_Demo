@@ -44,7 +44,7 @@ public class LvItemAdapter extends BaseAdapter {
         ViewHolder viewHolder;
         if (null == convertView) {
             viewHolder = new ViewHolder();
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.lv_item_view, null);
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.base_sample_list_click_item, null);
             viewHolder.desc = (TextView) convertView.findViewById(R.id.desc);
             viewHolder.btn = (Button) convertView.findViewById(R.id.btn);
 
