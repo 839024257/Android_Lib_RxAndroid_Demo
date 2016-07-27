@@ -1,4 +1,4 @@
-package com.hades.android_lib_rxandroid_demo;
+package com.hades.android_lib_rxandroid_demo.creating_observables;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.hades.android_lib_rxandroid_demo.R;
 import com.hades.android_lib_rxandroid_demo.base.ISampleFragment;
 
 import java.util.concurrent.TimeUnit;
@@ -40,16 +41,17 @@ public class IntervalFragment extends Fragment implements ISampleFragment {
     public void onDestroyView() {
         ButterKnife.reset(this);
         super.onDestroyView();
+        stop();
     }
 
 
     /**
      * Observable.interval()
-     * timer与interval都是默认运行在一个新线程上面
      * 每间隔指定时间发送一个递增的计数(轮询器)。
      */
     @OnClick(R.id.start)
     public void start() {
+        Log.d(TAG, "threadName=" + Thread.currentThread().getName());
         if (!(null == observable4Interval || observable4Interval.isUnsubscribed())) {
             return;
         }
@@ -67,6 +69,7 @@ public class IntervalFragment extends Fragment implements ISampleFragment {
 
             @Override
             public void onNext(Long aLong) {
+                Log.d(TAG, "onNext: threadName=" + Thread.currentThread().getName());
                 Log.d(TAG, "position1,onNext : aLong = " + aLong);
             }
 

@@ -13,6 +13,10 @@ public class DemoDatas {
         return "Hello";
     }
 
+    public static String getStrData2() {
+        return "Open";
+    }
+
     public static User getUser() {
         return new User("Jerry", "2016072");
     }

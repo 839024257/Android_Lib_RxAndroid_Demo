@@ -2,6 +2,9 @@ package com.hades.android_lib_rxandroid_demo;
 
 import com.hades.android_lib_rxandroid_demo.base.BaseSampleListClickActivity;
 import com.hades.android_lib_rxandroid_demo.base.LvItemBean;
+import com.hades.android_lib_rxandroid_demo.creating_observables.IntervalFragment;
+import com.hades.android_lib_rxandroid_demo.creating_observables.JustFragment;
+import com.hades.android_lib_rxandroid_demo.creating_observables.TimerFragment;
 
 import java.util.List;
 
@@ -27,6 +30,9 @@ public class DemoListClickActivity extends BaseSampleListClickActivity {
             case 2:
                 doPositionClick(new IntervalFragment());
                 break;
+            case 3:
+                doPositionClick(new JustFragment());
+                break;
 
             default:
                 break;
@@ -38,6 +44,7 @@ public class DemoListClickActivity extends BaseSampleListClickActivity {
         mDataSource.add(0, new LvItemBean("Sample 1", "btn0"));
         mDataSource.add(new LvItemBean("Observable.timer()", "btn1"));
         mDataSource.add(new LvItemBean("Observable.interval()", "btn2"));
+        mDataSource.add(new LvItemBean("Observable.just()", "btn3"));
     }
 
     @Override
