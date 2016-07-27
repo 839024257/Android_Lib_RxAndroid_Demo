@@ -515,7 +515,7 @@ public class Sample1Fragment extends BaseSampleListClickFragment {
     @Override
     public void createDataSource4Lv(List<LvItemBean> mDataSource) {
         mDataSource.add(0, new LvItemBean("Send a string", "btn0"));
-        mDataSource.add(1, new LvItemBean("Send a string. Observable.just is a simplification for Observable.create.", "btn1"));
+        mDataSource.add(1, new LvItemBean("Send a string. Observable.just is a simplification for Observable.create.", "start"));
         mDataSource.add(2, new LvItemBean("map的功能就是在observable和subscribe之间可以对数据进行操作", "btn2"));
         mDataSource.add(3, new LvItemBean("[RxJava] Observer as receiver.", "btn3"));
         mDataSource.add(4, new LvItemBean("[RxJava] How Observable to emit the story from API server..", "btn4"));

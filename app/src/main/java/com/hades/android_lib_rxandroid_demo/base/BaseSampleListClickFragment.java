@@ -42,6 +42,7 @@ public abstract class BaseSampleListClickFragment extends Fragment implements IS
         createDataSource();
         mAdapter = new LvItemAdapter(getActivity(), mDataSource);
         mAdapter.setDelegate(this);
+        mAdapter.setTextWhite(true);
 
         desc.setText(getDescTitle());
 

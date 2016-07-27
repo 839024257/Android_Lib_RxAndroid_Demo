@@ -1,6 +1,7 @@
 package com.hades.android_lib_rxandroid_demo.base;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,17 +14,19 @@ import com.hades.android_lib_rxandroid_demo.R;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by yc99656 on 7/20/2016.
- */
 public class LvItemAdapter extends BaseAdapter {
     private List<LvItemBean> mDataSource;
     private Context mContext;
     private ILvItemBtnClickDelegate mDelegate;
+    private boolean mIsTextWhite;
 
     public LvItemAdapter(Context context, List<LvItemBean> dataSource) {
         this.mContext = context;
         this.mDataSource = dataSource;
+    }
+
+    public void setTextWhite(boolean textWhite) {
+        mIsTextWhite = textWhite;
     }
 
     @Override
@@ -73,6 +76,11 @@ public class LvItemAdapter extends BaseAdapter {
                 mDelegate.onClick(position);
             }
         });
+
+        if (mIsTextWhite) {
+            viewHolder.desc.setTextColor(Color.parseColor("#F5F5F5"));
+//            viewHolder.btn.setTextColor(Color.parseColor("#F5F5F5"));
+        }
         return convertView;
     }
 

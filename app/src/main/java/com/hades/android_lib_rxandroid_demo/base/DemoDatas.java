@@ -1,7 +1,5 @@
 package com.hades.android_lib_rxandroid_demo.base;
 
-import com.hades.android_lib_rxandroid_demo.User;
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -19,8 +19,14 @@ public class DemoListClickActivity extends BaseSampleListClickActivity {
             case 0:
                 doPositionClick(new Sample1Fragment());
                 break;
+
             case 1:
-                doPositionClick(new Sample2Fragment());
+                doPositionClick(new TimerFragment());
+                break;
+
+            case 2:
+                doPositionClick(new IntervalFragment());
+                break;
 
             default:
                 break;
@@ -29,8 +35,9 @@ public class DemoListClickActivity extends BaseSampleListClickActivity {
 
     @Override
     public void createDataSource4Lv(List<LvItemBean> mDataSource) {
-        mDataSource.add(0, new LvItemBean("Sample 1", "btn1"));
-        mDataSource.add(1, new LvItemBean("Sample 2", "btn2"));
+        mDataSource.add(0, new LvItemBean("Sample 1", "btn0"));
+        mDataSource.add(new LvItemBean("Observable.timer()", "btn1"));
+        mDataSource.add(new LvItemBean("Observable.interval()", "btn2"));
     }
 
     @Override

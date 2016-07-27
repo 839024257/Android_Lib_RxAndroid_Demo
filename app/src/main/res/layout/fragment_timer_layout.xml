@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="left"
+              android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_green_light"
+        android:gravity="center"
+        android:text="timer"
+        android:textStyle="bold"/>
+
+
+    <Button
+        android:id="@+id/btn1"
+        style="@style/demoBtnStyle"
+        android:text="timer按指定时间延迟发送一个0L"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="timer 每间隔指定时间发送一个递增的计数(轮询器)"/>
+
+    <Button
+        android:id="@+id/start"
+        style="@style/demoBtnStyle"
+        android:text="start"/>
+
+    <Button
+        android:id="@+id/stop"
+        style="@style/demoBtnStyle"
+        android:text="stop"/>
+</LinearLayout>

@@ -22,15 +22,10 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.4.0'
 
-    /**
-     * Ref:
-     * https://github.com/ReactiveX/RxAndroid
-     */
-    compile 'io.reactivex:rxandroid:1.2.1'
-// Because RxAndroid releases are few and far between, it is recommended you also
-// explicitly depend on RxJava's latest version for bug fixes and new features.
-    compile 'io.reactivex:rxjava:1.1.6'
-    compile 'com.jakewharton:butterknife:6.0.0'
+    compile rootProject.ext.dependencies.butterKnife
+    compile rootProject.ext.dependencies.androidAppcompatV7
+    compile rootProject.ext.dependencies.rxandroid
+    compile rootProject.ext.dependencies.rxjava
+    compile rootProject.ext.dependencies.butterKnife
 }
