@@ -30,9 +30,15 @@ public class DemoListClickActivity extends BaseSampleListClickActivity {
             case 2:
                 doPositionClick(new IntervalFragment());
                 break;
+
             case 3:
                 doPositionClick(new JustFragment());
                 break;
+
+            case 4:
+                doPositionClick(new CreateFragment());
+                break;
+
 
             default:
                 break;
