@@ -23,11 +23,29 @@ public class DemoDatas {
 
     public static List<String> getStrList() {
         List<String> list = new ArrayList<>();
-        list.add("12");
-        list.add("123");
-        list.add("13");
-        list.add("135");
+        list.add("s12");
+        list.add("s123");
+        list.add("s13");
+        list.add("s135");
         return list;
+    }
+
+    public static int getInt() {
+        return 2016;
+    }
+
+    public static Integer getInteger() {
+        return 2016;
+    }
+
+    public static int[] getIntArray() {
+        int[] items = {10, 11, 12, 13, 14, 15};
+        return items;
+    }
+
+    public static Integer[] getIntegerArray() {
+        Integer[] items = {10, 11, 12, 13, 14, 15};
+        return items;
     }
 
     public static List<String> getBigStrList() {

@@ -47,6 +47,7 @@ public abstract class BaseSampleListClickActivity extends Activity implements Lv
         createDataSource();
         mAdapter = new LvItemAdapter(BaseSampleListClickActivity.this, mDataSource);
         mAdapter.setDelegate(this);
+        mAdapter.setTextWhite(true);
         listView.setAdapter(mAdapter);
     }
 

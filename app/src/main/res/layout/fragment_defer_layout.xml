@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:background="@android:color/holo_green_light"
         android:gravity="center"
-        android:text="Just demo"
+        android:text="Defer demo"
         android:textSize="20dp"
         android:textStyle="bold"/>
 

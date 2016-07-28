@@ -13,6 +13,8 @@ import com.hades.android_lib_rxandroid_demo.base.DemoDatas;
 import com.hades.android_lib_rxandroid_demo.base.ISampleFragment;
 import com.hades.android_lib_rxandroid_demo.base.User;
 
+import java.util.List;
+
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Observable;
@@ -80,6 +82,22 @@ public class JustFragment extends Fragment implements ISampleFragment {
                  * btn3,call: user=User{name='Jerry', time='2016072'}
                  */
                 Log.d(TAG, "btn3,call: user=" + user);
+            }
+        });
+    }
+
+    @OnClick(R.id.btn4)
+    public void btn4() {
+        Observable.from(DemoDatas.getStrList()).subscribe(new Action1<String>() {
+            @Override
+            public void call(String s) {
+                /**
+                 *btn4,call: s=s12
+                 btn4,call: s=s123
+                 btn4,call: s=s13
+                 btn4,call: s=s135
+                 */
+                Log.d(TAG, "btn4,call: s=" + s);
             }
         });
     }
