@@ -45,6 +45,7 @@ public class DemoListClickActivity extends BaseSampleListClickActivity {
         mDataSource.add(new LvItemBean("Observable.timer()", "btn1"));
         mDataSource.add(new LvItemBean("Observable.interval()", "btn2"));
         mDataSource.add(new LvItemBean("Observable.just()", "btn3"));
+        mDataSource.add(new LvItemBean("Observable.create", "btn4"));
     }
 
     @Override
