@@ -1,4 +1,4 @@
-package com.hades.android_lib_rxandroid_demo;
+package com.hades.android_lib_rxandroid_demo.creating_observables;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.hades.android_lib_rxandroid_demo.R;
 import com.hades.android_lib_rxandroid_demo.base.ISampleFragment;
 
 import java.util.List;

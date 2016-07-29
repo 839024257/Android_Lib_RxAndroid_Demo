@@ -2,8 +2,12 @@ package com.hades.android_lib_rxandroid_demo;
 
 import com.hades.android_lib_rxandroid_demo.base.BaseSampleListClickActivity;
 import com.hades.android_lib_rxandroid_demo.base.LvItemBean;
+import com.hades.android_lib_rxandroid_demo.creating_observables.CreateFragment;
+import com.hades.android_lib_rxandroid_demo.creating_observables.DeferFragment;
+import com.hades.android_lib_rxandroid_demo.creating_observables.FromFragment;
 import com.hades.android_lib_rxandroid_demo.creating_observables.IntervalFragment;
 import com.hades.android_lib_rxandroid_demo.creating_observables.JustFragment;
+import com.hades.android_lib_rxandroid_demo.creating_observables.RepeatFragment;
 import com.hades.android_lib_rxandroid_demo.creating_observables.TimerFragment;
 
 import java.util.List;
@@ -47,6 +51,10 @@ public class DemoListClickActivity extends BaseSampleListClickActivity {
                 doPositionClick(new DeferFragment());
                 break;
 
+            case 7:
+                doPositionClick(new RepeatFragment());
+                break;
+
             default:
                 break;
         }
@@ -61,6 +69,7 @@ public class DemoListClickActivity extends BaseSampleListClickActivity {
         mDataSource.add(new LvItemBean("Observable.create()", "btn4"));
         mDataSource.add(new LvItemBean("Observable.from()", "btn5"));
         mDataSource.add(new LvItemBean("Observable.defer()", "btn6"));
+        mDataSource.add(new LvItemBean("Observable.repeat()", "btn7"));
     }
 
     @Override
