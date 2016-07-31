@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    buildToolsVersion '24.0.1'
 
     defaultConfig {
         applicationId "com.hades.android_lib_rxandroid_demo"
