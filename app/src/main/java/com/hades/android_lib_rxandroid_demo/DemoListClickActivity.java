@@ -2,6 +2,7 @@ package com.hades.android_lib_rxandroid_demo;
 
 import com.hades.android_lib_rxandroid_demo.base.BaseSampleListClickActivity;
 import com.hades.android_lib_rxandroid_demo.base.LvItemBean;
+import com.hades.android_lib_rxandroid_demo.filtering_observables.AllFragment;
 import com.hades.android_lib_rxandroid_demo.filtering_observables.ContainsFragment;
 import com.hades.android_lib_rxandroid_demo.creating_observables.CreateFragment;
 import com.hades.android_lib_rxandroid_demo.creating_observables.DeferFragment;
@@ -70,6 +71,10 @@ public class DemoListClickActivity extends BaseSampleListClickActivity {
                 doPositionClick(new ContainsFragment());
                 break;
 
+            case 11:
+                doPositionClick(new AllFragment());
+                break;
+
             default:
                 break;
         }
@@ -90,6 +95,7 @@ public class DemoListClickActivity extends BaseSampleListClickActivity {
         mDataSource.add(new LvItemBean("filter", "btn8"));
         mDataSource.add(new LvItemBean("first", "btn9"));
         mDataSource.add(new LvItemBean("contains", "btn10"));
+        mDataSource.add(new LvItemBean("All", "btn11"));
     }
 
     @Override
