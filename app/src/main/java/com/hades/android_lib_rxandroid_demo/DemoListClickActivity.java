@@ -1,6 +1,7 @@
 package com.hades.android_lib_rxandroid_demo;
 
 import com.hades.android_lib_rxandroid_demo.base.BaseSampleListClickActivity;
+import com.hades.android_lib_rxandroid_demo.base.LvItemBean;
 import com.hades.android_lib_rxandroid_demo.creating_observables.CreateFragment;
 import com.hades.android_lib_rxandroid_demo.creating_observables.DeferFragment;
 import com.hades.android_lib_rxandroid_demo.creating_observables.FromFragment;

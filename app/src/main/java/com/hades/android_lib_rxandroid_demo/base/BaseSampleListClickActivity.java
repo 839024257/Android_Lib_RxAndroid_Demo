@@ -47,6 +47,7 @@ public abstract class BaseSampleListClickActivity extends ListActivity {
         createDataSource();
         SimpleAdapter simpleAdapter = new SimpleAdapter(this, mDataSource, android.R.layout.simple_list_item_2, new String[]{TAG_Title, TAG_Desc}, new int[]{android.R.id.text1, android.R.id.text2});
         setListAdapter(simpleAdapter);
+
     }
 
     @Override
@@ -59,10 +60,10 @@ public abstract class BaseSampleListClickActivity extends ListActivity {
         if (isShowFragment) {
             container.setVisibility(View.VISIBLE);
             lvContainer.setVisibility(View.GONE);
-            return;
+
+            desc.setVisibility(View.GONE);
+
         }
-        container.setVisibility(View.GONE);
-        lvContainer.setVisibility(View.VISIBLE);
     }
 
     @Override

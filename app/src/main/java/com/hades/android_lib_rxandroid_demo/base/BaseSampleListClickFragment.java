@@ -44,6 +44,7 @@ public abstract class BaseSampleListClickFragment extends ListFragment implement
         createDataSource();
         desc.setText(getDescTitle());
 
+
         return view;
     }
 

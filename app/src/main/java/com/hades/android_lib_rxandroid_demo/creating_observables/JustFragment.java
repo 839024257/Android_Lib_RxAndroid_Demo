@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.hades.android_lib_rxandroid_demo.R;
 import com.hades.android_lib_rxandroid_demo.base.DemoDatas;
 import com.hades.android_lib_rxandroid_demo.base.ISampleFragment;
+import com.hades.android_lib_rxandroid_demo.base.User;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
